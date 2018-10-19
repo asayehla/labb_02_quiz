@@ -1,0 +1,73 @@
+<html>
+
+<head>
+  <script>
+    var req = new XMLHttpRequest;
+    req.onreadystatechange = function() {
+      if (req.readyState === 4) {
+        if (req.status === 200) { // Skriv ut resultatet
+          console.log(req.responseText);
+        } else {
+          console.log("HTTP-status är inte 200, utan" + req.status);
+        }
+      } else {
+        console.log(req.readyState);
+      }
+    }
+
+        var res;
+        document.addEventListener('DOMContentLoaded', function() {
+
+          req.onreadystatechange = function() {
+            if (req.readyState == 4) {
+              if (req.status == 200) {
+                console.log(req.response);
+
+                res = req.response;
+
+                res.forEach(function(res, index) {
+
+                  let questionForm = document.createElement("form");
+                  questionForm.classList.add("question");
+                  questionForm.id = index;
+                  content.appendChild(questionForm);
+
+                  var options =
+                `
+                <input type="radio" value="answer">${res.incorrect_answer}
+                <td>${res.category}</td>
+                <td>${res.type}</td>
+                <td>${res.question}</td>
+                <td>${res.incorrect_answer}</td>
+                <td>${res.correct_answer}</td>
+                                 `;
+
+                  document.getElementById(questionForm.id).innerHTML = options;
+                });
+
+
+              }
+            }
+          };
+
+          req.open("GET", "https://opentdb.com/api.php?amount=10&category=20&difficulty=medium&type=multiple");
+          req.responseType = 'json';
+          req.send(); //sänder iväg en förfrågan.
+
+        });
+
+  </script>
+  <style>
+  </style>
+</head>
+
+<body>
+  <div class="frame">
+    <div id="question"></div>
+    <div id="options"></div>
+    <div id="answer"></div>
+    <button>Submit</button>
+  </div>
+</body>
+
+</html>
