@@ -15,8 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log(req.response); //gets the object
 
         res_01 = req.response;
-        res = res_01.results[0];
-        //console.log(res.question); works
+        res = res_01.results[0]; //console.log(res.question);
 
           //Header
           var headName =`<h2>${res.category}</h2>`;
@@ -62,9 +61,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 <style>
+h1 {font-family: serif; font-size:2em; font-weight: lighter;}
+h2 {font-family: serif; font-size:1em; font-weight: lighter;}
+p  {font-family: serif; font-size:1em; font-weight: lighter;}
+#content {background-color:rgb(191, 249, 152); padding: 1em;}
 </style>
 </head>
 <body>
+  <h1>Åsas Quiz</h1>
   <div id="quizName"></div>
   <div id="content">
   </div>
