@@ -17,7 +17,12 @@ document.addEventListener('DOMContentLoaded', function() {
         res = res_01.results[0];
         console.log(res.question);
 
-        res_01.results.forEach(function(res_01results, index) {
+          //Header
+          var headName =`<p>${res.category}</p>`;
+          document.getElementById("quizName").innerHTML = headName;
+          //end of Header
+
+        res_01.results.forEach(function(res, index) {
 
           let questionForm = document.createElement("form");
           questionForm.classList.add("question");
@@ -25,9 +30,8 @@ document.addEventListener('DOMContentLoaded', function() {
           content.appendChild(questionForm);
 
             var options = `
-          <p>${res.category}</p>
-          <p>${res.type}</p>
           <p>${res.question}</p>
+
                      `;
 
             document.getElementById(questionForm.id).innerHTML = options;
@@ -49,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </style>
 </head>
 <body>
+  <div id="quizName"></div>
   <div id="content">
   </div>
 
