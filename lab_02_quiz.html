@@ -5,20 +5,21 @@
   var res;
   var res_01;
 
+  //var incorrectAnswer;
+
 document.addEventListener('DOMContentLoaded', function() {
 
     req.onreadystatechange = function() {
       if (req.readyState == 4) {
       if (req.status == 200) {
-      console.log(req.response);
+      console.log(req.response); //gets the object
 
         res_01 = req.response;
-
         res = res_01.results[0];
-        console.log(res.question);
+        //console.log(res.question); works
 
           //Header
-          var headName =`<p>${res.category}</p>`;
+          var headName =`<h2>${res.category}</h2>`;
           document.getElementById("quizName").innerHTML = headName;
           //end of Header
 
@@ -29,8 +30,17 @@ document.addEventListener('DOMContentLoaded', function() {
           questionForm.id = index;
           content.appendChild(questionForm);
 
-            var options = `
+    console.log(res.incorrect_answers);
+    //console.log(res.incorrect_answers[1]);
+    //incorrectAnswer.push(res.incorrect_answers);
+
+    //console.log(incorrectAnswer);
+
+      //let random =Math.floor(Math.random()*4);
+
+        var options = `
           <p>${res.question}</p>
+          <input type="radio" value="answer" id="f1">${res.correct_answer}
 
                      `;
 
@@ -44,9 +54,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     req.open("GET", "https://opentdb.com/api.php?amount=10&category=20&difficulty=medium&type=multiple");
     req.responseType = 'json';
-    req.send(); //sänder iväg en förfrågan.
+    req.send();
 
   });
+
+
 
 </script>
 <style>
