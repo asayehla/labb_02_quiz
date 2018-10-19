@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         res = res_01.results[0];
         console.log(res.question);
 
-        res.forEach(function(res, index) {
+        res_01.results.forEach(function(res_01results, index) {
 
           let questionForm = document.createElement("form");
           questionForm.classList.add("question");
@@ -28,10 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
           <p>${res.category}</p>
           <p>${res.type}</p>
           <p>${res.question}</p>
-          <input type="radio" value="answer" id="f1">${randomOption[0]}
-          <input type="radio" value="answer" id="f2">${randomOption[1]}
-          <input type="radio" value="answer" id="f3">${randomOption[2]}
-          <input type="radio" value="answer" id="f4">${randomOption[3]}
                      `;
 
             document.getElementById(questionForm.id).innerHTML = options;
@@ -53,8 +49,9 @@ document.addEventListener('DOMContentLoaded', function() {
 </style>
 </head>
 <body>
-  <div class="frame">
-  <button>Submit</button>
+  <div id="content">
   </div>
+
+  <button>Submit</button>
 </body>
 </html>
