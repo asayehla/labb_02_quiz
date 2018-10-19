@@ -1,73 +1,60 @@
 <html>
-
 <head>
-  <script>
-    var req = new XMLHttpRequest;
+<script>
+  var req = new XMLHttpRequest;
+  var res;
+  var res_01;
+
+document.addEventListener('DOMContentLoaded', function() {
+
     req.onreadystatechange = function() {
-      if (req.readyState === 4) {
-        if (req.status === 200) { // Skriv ut resultatet
-          console.log(req.responseText);
-        } else {
-          console.log("HTTP-status är inte 200, utan" + req.status);
+      if (req.readyState == 4) {
+      if (req.status == 200) {
+      console.log(req.response);
+
+        res_01 = req.response;
+
+        res = res_01.results[0];
+        console.log(res.question);
+
+        res.forEach(function(res, index) {
+
+          let questionForm = document.createElement("form");
+          questionForm.classList.add("question");
+          questionForm.id = index;
+          content.appendChild(questionForm);
+
+            var options = `
+          <p>${res.category}</p>
+          <p>${res.type}</p>
+          <p>${res.question}</p>
+          <input type="radio" value="answer" id="f1">${randomOption[0]}
+          <input type="radio" value="answer" id="f2">${randomOption[1]}
+          <input type="radio" value="answer" id="f3">${randomOption[2]}
+          <input type="radio" value="answer" id="f4">${randomOption[3]}
+                     `;
+
+            document.getElementById(questionForm.id).innerHTML = options;
+          });
+
+
         }
-      } else {
-        console.log(req.readyState);
       }
-    }
+    };
 
-        var res;
-        document.addEventListener('DOMContentLoaded', function() {
+    req.open("GET", "https://opentdb.com/api.php?amount=10&category=20&difficulty=medium&type=multiple");
+    req.responseType = 'json';
+    req.send(); //sänder iväg en förfrågan.
 
-          req.onreadystatechange = function() {
-            if (req.readyState == 4) {
-              if (req.status == 200) {
-                console.log(req.response);
+  });
 
-                res = req.response;
-
-                res.forEach(function(res, index) {
-
-                  let questionForm = document.createElement("form");
-                  questionForm.classList.add("question");
-                  questionForm.id = index;
-                  content.appendChild(questionForm);
-
-                  var options =
-                `
-                <input type="radio" value="answer">${res.incorrect_answer}
-                <td>${res.category}</td>
-                <td>${res.type}</td>
-                <td>${res.question}</td>
-                <td>${res.incorrect_answer}</td>
-                <td>${res.correct_answer}</td>
-                                 `;
-
-                  document.getElementById(questionForm.id).innerHTML = options;
-                });
-
-
-              }
-            }
-          };
-
-          req.open("GET", "https://opentdb.com/api.php?amount=10&category=20&difficulty=medium&type=multiple");
-          req.responseType = 'json';
-          req.send(); //sänder iväg en förfrågan.
-
-        });
-
-  </script>
-  <style>
-  </style>
+</script>
+<style>
+</style>
 </head>
-
 <body>
   <div class="frame">
-    <div id="question"></div>
-    <div id="options"></div>
-    <div id="answer"></div>
-    <button>Submit</button>
+  <button>Submit</button>
   </div>
 </body>
-
 </html>
